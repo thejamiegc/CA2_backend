@@ -3,6 +3,7 @@ package facades;
 import com.google.gson.Gson;
 import dtos.ChuckJokeDTO;
 import dtos.DadJokeDTO;
+import dtos.WeatherDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,5 +50,9 @@ public class JokeFacade {
     public ChuckJokeDTO createChuckJokeDTO(String input){
         return GSON.fromJson(input,ChuckJokeDTO.class);
     }
+    public WeatherDTO createWeatherDTO(String input){
+        return GSON.fromJson(input,WeatherDTO.class);
+    }
+
 
 }
