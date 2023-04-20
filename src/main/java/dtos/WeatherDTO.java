@@ -1,5 +1,7 @@
 package dtos;
 
+import entities.Weather;
+
 import javax.persistence.EntityManagerFactory;
 
 public class WeatherDTO {
@@ -14,7 +16,12 @@ public class WeatherDTO {
     public WeatherDTO(){
     }
 
-    public WeatherDTO(String latitude, String longitude,Float temp,String condition) {
+    public WeatherDTO(Weather weather) {
+        this.tempInC = weather.getTemp();
+        this.condition = weather.getCondition();
+    }
+
+    public WeatherDTO(String latitude, String longitude, Float temp, String condition) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.tempInF = temp;

@@ -1,6 +1,7 @@
 package rest;
 
 import com.google.gson.Gson;
+import dtos.CityDTO;
 import dtos.WeatherDTO;
 import facades.WeatherFacade;
 import utils.EMF_Creator;
@@ -27,6 +28,8 @@ public class WeatherResource {
         System.out.println("getting weather");
         String response = FACADE.getHttpResponse("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ city + "?unitGroup=us&key=T575QYQBWAZ686YMYP4VGEJDS&contentType=json");
         WeatherDTO weatherDTO = FACADE.createWeatherDTO(response);
+        //     FACADE.createWeatherInDB(weatherDTO);
+        FACADE.createCityInDB(new CityDTO(city));
         return Response.ok().entity(weatherDTO).build();
     }
 }

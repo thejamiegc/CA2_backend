@@ -1,9 +1,9 @@
 package facades;
 
 import com.google.gson.Gson;
-import dtos.ChuckJokeDTO;
-import dtos.DadJokeDTO;
-import dtos.WeatherDTO;
+import dtos.*;
+import entities.City;
+import entities.Weather;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -83,5 +83,29 @@ public class WeatherFacade {
         return new WeatherDTO(latitude,longditude,temp,condition);
     }
 
+    public WeatherDTO createWeatherInDB(WeatherDTO weatherDTO){
+        Weather weather = new Weather( weatherDTO.getTempInC(), weatherDTO.getCondition());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(weather);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new WeatherDTO(weather);
+    }
 
+    public CityDTO createCityInDB(CityDTO cityDTO){
+        City city = new City(cityDTO.getName());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(city);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new CityDTO(city);
+    }
 }
